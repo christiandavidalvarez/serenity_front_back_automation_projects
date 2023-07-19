@@ -1,41 +1,25 @@
 package co.com.certification.automation.tasks;
 
 import co.com.certification.automation.model.Product;
-import co.com.certification.automation.userinterface.CabecerasPage;
-import io.cucumber.datatable.internal.difflib.Chunk;
-import net.serenitybdd.core.pages.ClickStrategy;
-import net.serenitybdd.core.pages.WebElementFacade;
+import lombok.SneakyThrows;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
-import net.serenitybdd.screenplay.actions.Click;
-import net.serenitybdd.screenplay.actions.HoverOverTarget;
-import net.serenitybdd.screenplay.actions.Scroll;
-import net.serenitybdd.screenplay.actions.ScrollTo;
-import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
-import net.serenitybdd.screenplay.questions.WebElementQuestion;
 import net.serenitybdd.screenplay.targets.Target;
-import net.serenitybdd.screenplay.waits.Wait;
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-
-
-import java.time.Duration;
-import java.time.temporal.TemporalUnit;
+import java.security.SecureRandom;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
-
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 
 public class SelectSeveralProductsRandomlyTask implements Task {
 
-    Random random;
+    SecureRandom random;
     private static List<Product> products;
     public SelectSeveralProductsRandomlyTask() {
-        random= new Random();
+        random= new SecureRandom();
         generateProductsListRandom();
     }
 
@@ -124,13 +108,11 @@ public class SelectSeveralProductsRandomlyTask implements Task {
 
     }
 
+    @SneakyThrows
     private static void waitWithSleep(long timeInSeconds) {
-        try {
-            Thread.sleep(1000*timeInSeconds);
-        } catch (InterruptedException e) {
-            System.err.println(e.getMessage());
 
-        }
+            Thread.sleep(1000*timeInSeconds);
+
     }
 
     public static SelectSeveralProductsRandomlyTask selectSeveralProductsRandomlyTask(){
