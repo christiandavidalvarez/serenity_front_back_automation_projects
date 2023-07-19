@@ -32,18 +32,18 @@ import static net.serenitybdd.screenplay.Tasks.instrumented;
 
 public class SelectSeveralProductsRandomlyTask implements Task {
 
+    Random random;
     private static List<Product> products;
     public SelectSeveralProductsRandomlyTask() {
+        random= new Random();
         generateProductsListRandom();
     }
 
     private void generateProductsListRandom() {
         products = new ArrayList<>();
         Set<Integer> generatePositions = new HashSet<>();
-        Random random = new Random();
         while (products.size() < 5) {
             int position = random.nextInt(12) + 1;
-
             boolean isPositionAvailable= isPositionAvailable(position);
             if (!(generatePositions.contains(position)) && isPositionAvailable)
             {
@@ -124,10 +124,11 @@ public class SelectSeveralProductsRandomlyTask implements Task {
 
     }
 
-    private static void waitWithSleep(int timeInSeconds) {
+    private static void waitWithSleep(long timeInSeconds) {
         try {
             Thread.sleep(1000*timeInSeconds);
         } catch (InterruptedException e) {
+            System.err.println(e.getMessage());
 
         }
     }
